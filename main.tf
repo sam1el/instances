@@ -7,13 +7,13 @@ data "terraform_remote_state" "network_details" {
   }
 }
 
-resource "aws_instance" "my_vm" {
-  			ami = var.my-vm_ami
-			  subnet_id = data.terraform_remote_state.network_details.outputs.my_subnet
-  			instance_type = "t2.micro"
-        key_name = "student.2-vm-key"
-        vpc_security_group_ids = data.terraform_remote_state.network_details.outputs.security_group_id
-  			tags = {
-				Name = "student.2-vm1"
-  			}
-}
+module "webserver" {
+  source = "./modules/linux_node"
+  ami = "ami-029fa1c105b8cc9e1"
+  instance_type = "t2.micro"
+  instance_count = "1"
+  key_name  = data.terraform_remote_state.network_details.outputs.vm_ssh_key
+  subnet_id = data.terraform_remote_state.network_details.outputs.my_subnet
+  vpc_security_group_ids = data.terraform_remote_state.network_details.outputs.security_group_id
+  tags = "student.2-vm1"
+  }
