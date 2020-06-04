@@ -31,3 +31,11 @@ variable "region" {
 variable "profile" {
   default = "student.2"
 }
+
+variable "vm_user" {
+  default = "ubuntu"
+}
+
+variable "vm_pass" {
+  default = "null"
+}
