@@ -1,9 +1,9 @@
 data "terraform_remote_state" "network_details" {
   backend = "s3"
   config = {
-    bucket = "student.2-jeffe-bucket"
-    key = "student.2-instance-state"
-    region = "us-east-2"
+    bucket = var.network-details_config["bucket"]
+    key = var.network-details_config["key"]
+    region = var.network-details_config["region"]
   }
 }
 
