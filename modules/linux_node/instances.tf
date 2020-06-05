@@ -29,4 +29,32 @@ resource "aws_instance" "my_vm" {
       topology = var.hab_topology
     }
   }
+
+  provisioner "remote-exec" {
+    connection {
+    host = self.public_ip
+    type = "ssh"
+    user = var.vm_user
+    password = var.vm_pass
+    agent = true
+    private_key = file("../keys/student.2-vm-key")
+    }
+    inline = [
+      "sudo hab pkg install -b core/git",
+      "sudo hab svc unload ${var.hab_service}",
+      "sudo hab svc status"
+      ]
+    }
+
+    provisioner "local-exec" {
+    when = destroy
+    command = "echo Machine being destroyed "
+    on_failure = continue
+  }
+
+   provisioner "local-exec" {
+    when = destroy
+    command = "echo Goodbye cruel world"
+    on_failure = continue
+  }
 }
