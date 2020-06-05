@@ -6,3 +6,11 @@ variable "network-details_config" {
       "region" = "us-east-2"
   }
 }
+
+variable "webserver_prefix" {
+   default = "student.2-webserver-vm"
+}
+
+variable "loadbalancer_prefix" {
+   default = "student.2-loadbalancer-vm"
+}

@@ -39,3 +39,13 @@ variable "vm_user" {
 variable "vm_pass" {
   default = "null"
 }
+
+variable "hab_service_name" {}
+
+variable "hab_service_type" {}
+
+variable "hab_service" {}
+
+variable "hab_strategy" {}
+
+variable "hab_topology" {}
